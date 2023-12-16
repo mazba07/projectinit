@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">
+            <div class="card text-center mt-4">
+                <div class="card-header">
+                    <h5 class="card-title">{{singlePost.title}}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{singlePost.body}}</p>
+                </div>
+                <div class="card-footer text-muted">
+                    {{singlePost.id | dateFormat}}
+                </div>
+            </div>
+
+            <div class="card text-center mt-4">
+                <div class="card-header">
+                    <h6 class="card-title">Comments</h6>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="comments | isAvailable; else commentsNotFound">
+                        <div *ngFor="let item of comments" class="alert alert-info" role="alert">
+                            <p class="text-start"> <strong>Anonymous: </strong>
+                                <span class="small">{{item.commetnBody}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <ng-template #commentsNotFound>
+                        <p class="text-center">No comments found</p>
+                    </ng-template>
+                    
+
+                    <form #newPostComment="ngForm" (ngSubmit)="addNewComment(newPostComment)">
+                        <div class="mb-3">
+                            <label class="form-label">Write your comment</label>
+                            <textarea name="commetnBody" class="form-control shadow-none" rows="2" ngModel></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

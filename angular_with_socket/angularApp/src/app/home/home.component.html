@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">
+            <div class="card text-center mt-2">
+                <div class="card-header">
+                    <h5>Add new post</h5>
+                </div>
+                <div class="card-body">
+                    <form #newPost="ngForm" (ngSubmit)="addNewPost(newPost)">
+                        <div class="mb-3">
+                            <input type="text" name="title" placeholder="Title" class="form-control shadow-none"
+                                ngModel>
+                        </div>
+                        <div class="mb-3">
+                            <textarea name="body" class="form-control shadow-none" rows="3" ngModel
+                                placeholder="Body"></textarea>
+                        </div>
+                        <p class="text-end">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+            <div *ngIf="post | isAvailable">
+                <div *ngFor="let item of post" class="card text-center mt-4">
+                    <div class="card-header">
+                        <a [routerLink]="['post-single',item.id]" class="text-decoration-none">
+                            <h5 class="card-title">{{item.title}}</h5>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{item.body}}</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <div class="d-flex">
+                            <div class="me-auto p-2">
+                                <p class="small fw-light">{{item.id | dateFormat}}</p>
+                            </div>
+                            <div class="p-2">
+                                <p (click)="deletePost(item.id)" class="text-end small fw-light">Delete</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
