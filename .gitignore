@@ -76,3 +76,7 @@ testem.log
 Thumbs.db
 
 
+
+
+*.pack
+*.json
